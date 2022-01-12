@@ -1,11 +1,13 @@
 package com.yehhoo.ArrayListLearn;
 
+import com.yehhoo.LinkListLearn.MyAbstractList;
+import com.yehhoo.LinkListLearn.MyList;
+
 @SuppressWarnings("unchecked")
-public class MyArrayList<E> {
+public class MyArrayList<E> extends MyAbstractList<E> {
     /**
      * 元素的数量
      */
-    private int size;
     /**
      * 所有的元素
      */
@@ -13,7 +15,6 @@ public class MyArrayList<E> {
 
     private static final int DEFAULT_CAPACITY = 10;
 
-    private static final int ELEMENT_NOT_FOUND = -1;
 
     public MyArrayList(int capacity){
         capacity = (capacity < DEFAULT_CAPACITY) ? DEFAULT_CAPACITY : capacity;
@@ -52,8 +53,8 @@ public class MyArrayList<E> {
      * @param element
      * @return
      */
-    public int contains(E element){
-        return indexOf(element);
+    public boolean contains(E element){
+        return indexOf(element) != ELEMENT_NOT_FOUND;
     }
     /**
      * 添加元素到尾部
@@ -104,8 +105,8 @@ public class MyArrayList<E> {
                 elements[i] = elements_tmp[i];
             }
         }
-        for (int i = (size - 1); i >= index; i--) {
-            elements[i + 1] = elements[i];
+        for (int i = size; i > index; i--) {
+            elements[i] = elements[i - 1];
         }
         elements[index] = element;
         size++;
@@ -126,6 +127,9 @@ public class MyArrayList<E> {
         size--;
         elements[size] = null;
         return index;
+    }
+    public void remove(E element){
+        remove(indexOf(element));
     }
     /**
      * 查看元素的索引

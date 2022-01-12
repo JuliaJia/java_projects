@@ -13,6 +13,7 @@ public class Main {
         ints.add(10);
         ints.add(20);
         ints.add(30);
+        Assert.test(ints.size() == 34);
         System.out.println(ints);
 //        array01.add(10);
 //        array01.add(20);
